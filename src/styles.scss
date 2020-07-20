@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+$theme-colors: (
+  "primary": #0057d9,
+  "danger": #ff4136,
+  "light":#46c1f1
+);
+.no-gutters{
+  width:100%;
+  margin-left:0;
+  margin-right:0;
+}
+.card{
+  margin:5px;
+}
+
+@import  "~bootstrap/scss/bootstrap.scss";
