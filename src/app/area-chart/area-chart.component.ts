@@ -14,7 +14,7 @@ export class AreaChartComponent implements OnInit, OnChanges {
   @Input() ymax = 200;
   @Input() hticks = 60;
   @Input() data: number[];
-  @Input() showLabel = 1;
+  @Input() showLabel = 0;
   hostElement; // Native element hosting the SVG container
   svg; // Top level SVG element
   g; // SVG Group element
