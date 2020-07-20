@@ -9,11 +9,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AreaChartComponent } from './area-chart/area-chart.component';
+import { ChartDataComponent } from './chart-data/chart-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AreaChartComponent
+    AreaChartComponent,
+    ChartDataComponent
   ],
   imports: [
     BrowserModule,
