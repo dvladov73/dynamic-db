@@ -16,6 +16,20 @@ $theme-colors: (
 .card{
   margin:5px;
 }
+.container {
+ max-width: 2500px;
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  font-size: 0px;
+  display: flex;
+  flex-wrap: wrap
+}
+body {
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+}
 
 
 @import  "~bootstrap/scss/bootstrap.scss";
