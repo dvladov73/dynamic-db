@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
-  <a class="navbar-brand" href="#" style="color:ivory;">Website Name</a>
+  <a class="navbar-brand" routerLink=""> <img class="logo" src="../assets/Finceptive-Logo.png" alt="Finceptive"> </a>
   <button class="navbar-toggler" style="color:ivory;"type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon" style="color:ivory;"></span>
   </button>
@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#"style="color:ivory;">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink='/home'style="color:ivory;">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"style="color:ivory;">Link</a>
@@ -21,61 +21,7 @@
   </div>
 </nav>
 
-<div class="container">
-  
-    <div class="card-group row no-gutters">
-      <div class="col-4 mx-auto">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text ...</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-8 mx-auto">
-        <div class="card"> <!-- style="width: 20rem;"-->
-          <div class="card-body">
-            <h4 class="card-title">Real-time chart</h4>
-            <app-chart-data></app-chart-data>
-            <!--<p class="card-text">Some quick example text ...</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>-->
-          </div>
-        </div>
-      </div> 
-    </div>
-    <div class="card-group row no-gutters">
-      <div class="col-4 mx-auto">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text ...</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-4 mx-auto">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text ...</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-4 mx-auto">
-        <div class="card"> <!-- style="width: 20rem;"-->
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text ...</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div> 
-    </div>
-  
- 
-</div>
+
 
 
 <router-outlet></router-outlet>

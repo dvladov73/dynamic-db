@@ -10,12 +10,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AreaChartComponent } from './area-chart/area-chart.component';
 import { ChartDataComponent } from './chart-data/chart-data.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CalendarModule } from './calendar/calendar.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+
+import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AreaChartComponent,
-    ChartDataComponent
+    ChartDataComponent,
+    PagenotfoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +33,12 @@ import { ChartDataComponent } from './chart-data/chart-data.component';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    FontAwesomeModule,
+    CalendarModule,
+    SharedModule,
+    CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
  
   ],
   providers: [],
