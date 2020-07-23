@@ -10,7 +10,7 @@ import { SalesInterface } from '../shared/data-interface';
   providedIn: 'root'
 })
 export class DataService {
-  private REST_API_SERVER = './assets/sales-data.json';
+  private REST_API_SERVER = 'assets/sales-data.json';
 
   constructor(private httpClient: HttpClient) { }
 

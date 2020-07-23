@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { AreaChartComponent } from './area-chart/area-chart.component';
 import { ChartDataComponent } from './chart-data/chart-data.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { CalendarModule } from './calendar/calendar.module';
 
-
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
+import { SalesChartComponent } from './sales-chart/sales-chart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { HomeComponent } from './home/home.component';
     AreaChartComponent,
     ChartDataComponent,
     PagenotfoundComponent,
-    HomeComponent
+    HomeComponent,
+    SalesChartComponent
   ],
   imports: [
     BrowserModule,
@@ -33,10 +36,11 @@ import { HomeComponent } from './home/home.component';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     FontAwesomeModule,
+    
     CalendarModule,
     FormsModule,
     ReactiveFormsModule,
- 
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
