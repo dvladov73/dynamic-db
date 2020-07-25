@@ -2,24 +2,21 @@
 <div class="container">
   
     <div class="card-group row no-gutters">
-      <div class="col-4 mx-auto">
+      <div class="col-6 mx-auto">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body"  id="chart">
             <h4 class="card-title">Card title</h4>
-              <div> <app-datepicker></app-datepicker></div>
-              <i class="fa fa-user-plus fa-3x"></i>>
-               <p class="card-text">Some quick example text ...</p>
-             
+            <app-sales-chart [data]="salesData"></app-sales-chart>
           </div>
+           
         </div>
       </div>
-      <div class="col-8 mx-auto">
+      <div class="col-6 mx-auto">
         <div class="card"> 
           <div class="card-body">
             <h4 class="card-title">Real-time chart</h4>
              <app-chart-data></app-chart-data>
- 
-          </div>
+           </div>
         </div>
       </div> 
     </div>
@@ -28,7 +25,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text ...</p>
+            <div> <app-datepicker></app-datepicker></div>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
@@ -36,14 +33,15 @@
       
       <div class="col-8 mx-auto" >
         <div class="card"> 
-          <div class="card-body" id="chart">
+          <div class="card-body">
             <h4 class="card-title">Card Title</h4>
-            <app-sales-chart [data]="salesData"></app-sales-chart>
+            <i class="fas fa-address-card"></i>
+            <p class="card-text">{{salesYTD|currency}}</p>
           </div>
         </div>
       </div> 
     </div>
   
- 
+   
 </div>
 

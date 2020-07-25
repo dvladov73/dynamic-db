@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AreaChartComponent } from './area-chart/area-chart.component';
 import { ChartDataComponent } from './chart-data/chart-data.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+//import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CalendarModule } from './calendar/calendar.module';
 
@@ -35,7 +35,7 @@ import { SalesChartComponent } from './sales-chart/sales-chart.component';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-    FontAwesomeModule,
+   // FontAwesomeModule,
     
     CalendarModule,
     FormsModule,

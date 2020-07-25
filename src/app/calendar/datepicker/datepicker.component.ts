@@ -11,11 +11,13 @@ import { FormBuilder, FormGroup, FormControl,ReactiveFormsModule } from '@angula
 export class DatepickerComponent  implements OnInit {
 
   constructor(private fb: FormBuilder) {}
-  myForm:FormGroup;
+  public myForm:FormGroup;
+  public minDate: Object = new Date(2019,1,1);
+  public maxDate: Object =  new Date(2020,5,1);
   ngOnInit() {
     this.myForm = this.fb.group({
-      date: null,
-     // range: null
+      date: null,      
+      range: null
     });
   }
 }
