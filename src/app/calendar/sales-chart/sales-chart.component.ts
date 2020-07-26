@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, ElementRef, OnChanges, } from '@angular/core';
 import * as d3 from 'd3';
 
-import { SalesInterface } from '../shared/data-interface';
+import { SalesInterface } from '../../shared/data-interface';
 
 @Component({
   selector: 'app-sales-chart',

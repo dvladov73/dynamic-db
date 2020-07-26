@@ -2,20 +2,20 @@
 <div class="container">
   
     <div class="card-group row no-gutters">
-      <div class="col-4 mx-auto">
+      <div class="col-8 mx-auto">
         <div class="card">
           <div class="card-body"  id="chart">
             <h4 class="card-title">Card title</h4>
-           
+            <app-sales-chart [data]="salesData"></app-sales-chart>
           </div>
            
         </div>
       </div>
-      <div class="col-8 mx-auto">
+      <div class="col-4 mx-auto">
         <div class="card"> 
           <div class="card-body">
-            <h4 class="card-title">Real-time chart</h4>
-             <app-chart-data></app-chart-data>
+            <h4 class="card-title">Time window</h4>
+            <div> <app-datepicker></app-datepicker></div> 
            </div>
         </div>
       </div> 
@@ -25,7 +25,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Card title</h4>
-          
+           
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
@@ -44,4 +44,3 @@
   
    
 </div>
-

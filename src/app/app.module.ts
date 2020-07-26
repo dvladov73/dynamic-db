@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
-import { SalesChartComponent } from './sales-chart/sales-chart.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { SalesChartComponent } from './sales-chart/sales-chart.component';
     ChartDataComponent,
     PagenotfoundComponent,
     HomeComponent,
-    SalesChartComponent
+   
+  
   ],
   imports: [
     BrowserModule,
