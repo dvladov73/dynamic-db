@@ -5,11 +5,13 @@ import { DataService } from '../../core/data.service';
 import { SalesInterface } from '../../shared/data-interface';
 
 import { Subject } from 'rxjs';
+
 @Component({
   selector: 'app-perf',
   templateUrl: './perf.component.html',
   styleUrls: ['./perf.component.scss']
 })
+
 export class PerfComponent implements OnInit, OnDestroy {
   salesData:SalesInterface[];
   averageSales:number=0;
@@ -34,9 +36,12 @@ export class PerfComponent implements OnInit, OnDestroy {
          this.salesYTD=this.averageSales*this.salesData.length;
          this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
          this.avCustomer();
-    })
-    
-  }
+        
+          
+          
+     })
+  } 
+     
   ngOnDestroy() {
     
     this.destroy$.next(true);
@@ -62,7 +67,7 @@ export class PerfComponent implements OnInit, OnDestroy {
     this.averageRevenue=(av_sales-av_exp);
   }
   private avProfitUnit(){
-   this.averageProfitUnit=this.averageRevenue/3;
+   this.averageProfitUnit=this.averageRevenue/3;  
   }
   private avCustomer(){
     this.av_cust_acc=this.salesData.reduce(function(acc, curr){
@@ -74,4 +79,5 @@ export class PerfComponent implements OnInit, OnDestroy {
       return acc;
       }, 0)/this.salesData.length;
   }
+
 }

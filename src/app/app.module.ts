@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
+import { GlobalsService } from './shared/globals.service';
 
 
 @NgModule({
@@ -27,8 +28,7 @@ import { HomeComponent } from './home/home.component';
     ChartDataComponent,
     PagenotfoundComponent,
     HomeComponent,
-   
-  
+    
   ],
   imports: [
     BrowserModule,
@@ -43,7 +43,7 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     HttpClientModule 
   ],
-  providers: [],
+  providers: [GlobalsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

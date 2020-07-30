@@ -25,7 +25,10 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Card title</h4>
-           
+            <div class="card-text" >
+          
+            <p>date </p> 
+            </div>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
@@ -34,9 +37,14 @@
       <div class="col-8 mx-auto" >
         <div class="card"> 
           <div class="card-body">
-            <h4 class="card-title">Card Title</h4>
+            <h4 class="card-title" style="text-align: center;"> Unit Performance</h4>
             <i class="fas fa-address-card"></i>
-            <p class="card-text">{{salesYTD|currency}}</p>
+            <ul class="card-text">
+              <li>Sales YTD {{salesYTD|currency}}</li>
+              <li>Average revenue {{averageRevenue|currency}}</li>
+              <li>Average Profit {{averageProfitUnit|currency}}</li>
+            </ul>
+            
           </div>
         </div>
       </div> 

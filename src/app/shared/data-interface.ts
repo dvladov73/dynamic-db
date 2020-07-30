@@ -1,5 +1,17 @@
 export interface SalesInterface {
-    month: string;
+    date: string;
+    sales1:number;
+    expense1:number;
+    sales2:number;
+    expense2:number;
+    sales3:number;
+    expense3:number;
+    cust_acc:number;
+    cust_ltv:number;
+
+}
+export interface newSalesInterface {
+    date: Date;
     sales1:number;
     expense1:number;
     sales2:number;

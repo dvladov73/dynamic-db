@@ -23,7 +23,7 @@ import { ChartDataComponent } from '../chart-data/chart-data.component';
     BsDatepickerModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-   
+  
    
   ]
 })

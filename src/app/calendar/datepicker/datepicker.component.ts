@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl,ReactiveFormsModule } from '@angula
 //import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 //import { componentFactoryName } from '@angular/compiler';
 
+import { GlobalsService } from '../../shared/globals.service';
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
@@ -10,7 +11,7 @@ import { FormBuilder, FormGroup, FormControl,ReactiveFormsModule } from '@angula
 })
 export class DatepickerComponent  implements OnInit {
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, glForm:GlobalsService) { this.myForm=glForm.myForm;}
   public myForm:FormGroup;
   public minDate: Object = new Date(2019,1,1);
   public maxDate: Object =  new Date(2020,5,1);
