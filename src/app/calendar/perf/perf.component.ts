@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-
+import {  FormGroup } from '@angular/forms';
+import { GlobalsService } from '../../shared/globals.service';
 import { DataService } from '../../core/data.service';
 import { SalesInterface } from '../../shared/data-interface';
 
@@ -14,6 +15,11 @@ import { Subject } from 'rxjs';
 
 export class PerfComponent implements OnInit, OnDestroy {
   salesData:SalesInterface[];
+  salesData1:SalesInterface[];
+  private s_date=new Date('2020,01,01');
+  private e_date=new Date('2020,10,01');
+  private date_s:string;
+  private date_d:Date;
   averageSales:number=0;
   averageRevenue:number=0;
   averageProfitUnit:number=0;
@@ -22,32 +28,53 @@ export class PerfComponent implements OnInit, OnDestroy {
   av_cust_acc:number=0;
   av_cust_ltv:number=0;
   destroy$: Subject<boolean> = new Subject<boolean>();
-    
-  
-  constructor(private dataService:DataService) {  }
+  isVisible:boolean=false;  
+  changeVisibility() {
+    this.isVisible = !this.isVisible;
+}
 
+  constructor(private dataService:DataService,glForm:GlobalsService) {this.myForm=glForm.myForm  }
+  public myForm:FormGroup;
   ngOnInit(): void {
-    
+  
+
     this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
          this.salesData = data;
+         this.salesData1=data;
+             /*setting the interval*/
+         this.dateFilter();
+         this.salesData=this.salesData1;
          this.avSales();
          this.avRevenue();
          this.avProfitUnit();
          this.salesYTD=this.averageSales*this.salesData.length;
          this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
          this.avCustomer();
-        
-          
-          
-     })
-  } 
      
+              
+     })
+     
+  } 
+       
   ngOnDestroy() {
     
     this.destroy$.next(true);
     // Unsubscribe from the subject
     this.destroy$.unsubscribe();
     
+  }
+ 
+  private dateFilter(){
+    for(var i=0;i<=this.salesData.length;i++)
+    {
+      this.date_s=this.salesData[i].date;
+      this.date_d=new Date(this.date_d);
+      if (this.date_d>=this.s_date){ 
+        if(this.date_d<=this.e_date){
+          this.salesData1.push(this.salesData[i]);
+        }  
+      }
+    }
   }
   private avSales(){
     var av_sales;

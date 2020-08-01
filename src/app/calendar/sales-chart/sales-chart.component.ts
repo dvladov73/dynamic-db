@@ -4,6 +4,7 @@ import * as d3Array from 'd3';
 
 import { SalesInterface } from '../../shared/data-interface';
 import { parseDate } from 'ngx-bootstrap/chronos';
+import { datepickerAnimation } from 'ngx-bootstrap/datepicker/datepicker-animations';
 
 @Component({
   selector: 'app-sales-chart',
@@ -13,19 +14,19 @@ import { parseDate } from 'ngx-bootstrap/chronos';
 })
 export class SalesChartComponent implements OnInit, OnChanges {
   @Input() data:SalesInterface[];
-
+  
   
  //Initial dimentions
  hostElement='#chart'; // Native element hosting the SVG container
- private s_date:Date;
- private e_date:Date;
+  
  private count:number;
  private height:number;
  private width:number;
  private barWidth:number;
  private barHeight:number;
  private margin = { top: 5, right: 100, bottom: 55, left: 60 };
-
+ 
+ 
  // group containers (X axis, Y axis and bars)
  private gx: any; private gy: any; private bars: any; private bars1:any;
  // Scales and Axis
@@ -40,19 +41,19 @@ export class SalesChartComponent implements OnInit, OnChanges {
     changeVisibility() {
         this.isVisible = !this.isVisible;
     }
-   
+ 
   constructor() {} 
   
   ngOnInit(): void {}
   ngOnChanges(): void {
    
-   
-  /*Date count*/
+ 
+     
+     /*Date count*/
      
      for (var i=0; i<this.data.length;i++){
-       this.count=i;
-     }
-     
+      this.count=i;
+    }
     /* Y scale Max */ 
     this.maxY=10;
     this.maxY1=this.data.reduce(function(max, x) { return ((x.sales1+x.sales2+x.sales3) > max) ? (x.sales1+x.sales2+x.sales3): max; }, 0);
@@ -194,5 +195,6 @@ export class SalesChartComponent implements OnInit, OnChanges {
     this.drawAxis();
     this.drawBars();
   }
+  
  
 }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl,ReactiveFormsModule } from '@angula
 //import { componentFactoryName } from '@angular/compiler';
 
 import { GlobalsService } from '../../shared/globals.service';
+import { getLocaleDateFormat } from '@angular/common';
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
@@ -11,7 +12,7 @@ import { GlobalsService } from '../../shared/globals.service';
 })
 export class DatepickerComponent  implements OnInit {
 
-  constructor(private fb: FormBuilder, glForm:GlobalsService) { this.myForm=glForm.myForm;}
+  constructor(private fb: FormBuilder, public glForm:GlobalsService) { glForm.myForm=this.myForm;}
   public myForm:FormGroup;
   public minDate: Object = new Date(2019,1,1);
   public maxDate: Object =  new Date(2020,5,1);
@@ -20,5 +21,7 @@ export class DatepickerComponent  implements OnInit {
       date: null,      
       range: null
     });
+    this.glForm.myForm=this.myForm;
+    
   }
 }
