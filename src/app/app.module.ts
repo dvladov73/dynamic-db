@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AreaChartComponent } from './area-chart/area-chart.component';
 import { ChartDataComponent } from './chart-data/chart-data.component';
-//import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { CalendarModule } from './calendar/calendar.module';
 
@@ -19,6 +19,7 @@ import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
 import { GlobalsService } from './shared/globals.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -36,12 +37,13 @@ import { GlobalsService } from './shared/globals.service';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-   // FontAwesomeModule,
+    MatSlideToggleModule,
     
     CalendarModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    BrowserAnimationsModule 
   ],
   providers: [GlobalsService],
   bootstrap: [AppComponent]

@@ -36,11 +36,7 @@ export class SalesChartComponent implements OnInit, OnChanges {
  private color: any; private color1:any;
  maxY: number; private maxY1: number; private maxY2: number;
 
- // Show/Hide switch
- isVisible = false;
-    changeVisibility() {
-        this.isVisible = !this.isVisible;
-    }
+ 
  
   constructor() {} 
   

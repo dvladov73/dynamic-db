@@ -9,7 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { PerfComponent } from './perf/perf.component';
 import { ChartDataComponent } from '../chart-data/chart-data.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { ChartDataComponent } from '../chart-data/chart-data.component';
     BsDatepickerModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-  
+    MatSlideToggleModule,
    
   ]
 })

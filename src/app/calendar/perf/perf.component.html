@@ -6,6 +6,9 @@
         <div class="card">
           <div class="card-body"  id="chart">
             <h4 class="card-title">Card title</h4>
+            <div >
+              Chart view<mat-slide-toggle (click)="changeVisibility();" id="showSlider">Table view</mat-slide-toggle>
+            </div>
             <app-sales-chart [data]="salesData"></app-sales-chart>
           </div>
            
@@ -27,7 +30,7 @@
             <h4 class="card-title">Card title</h4>
             <div class="card-text" >
           
-            <p>date </p> 
+            <p>date     {{date_d}}</p> 
             </div>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
