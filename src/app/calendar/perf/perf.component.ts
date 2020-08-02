@@ -42,6 +42,8 @@ export class PerfComponent implements OnInit, OnDestroy {
          this.salesData = data;
         // this.salesData1=data;
              /*setting the interval*/
+         this.s_date=new Date (this.myForm.value.range[0]); 
+         this.e_date=new Date (this.myForm.value.range[1]);   
          this.dateFilter();
          this.salesData=this.salesData1;
          this.avSales();
