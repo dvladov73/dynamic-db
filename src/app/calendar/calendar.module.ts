@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SalesChartComponent } from './sales-chart/sales-chart.component';
-import { DatepickerComponent } from './datepicker/datepicker.component';
+
 // Datepicker module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -13,9 +13,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
-  declarations: [DatepickerComponent, PerfComponent,SalesChartComponent],
+  declarations: [PerfComponent,SalesChartComponent],
   exports: [
-    DatepickerComponent
+    
   ],
   imports: [
     CommonModule,

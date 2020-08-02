@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomeComponent } from './home/home.component';
-import { GlobalsService } from './shared/globals.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -45,7 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserAnimationsModule 
   ],
-  providers: [GlobalsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

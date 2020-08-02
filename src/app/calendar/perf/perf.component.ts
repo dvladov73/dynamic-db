@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 
-import {  FormGroup } from '@angular/forms';
-import { GlobalsService } from '../../shared/globals.service';
+import { FormBuilder, FormGroup, FormControl,ReactiveFormsModule } from '@angular/forms';
+
 import { DataService } from '../../core/data.service';
 import { SalesInterface } from '../../shared/data-interface';
 
@@ -13,11 +13,13 @@ import { Subject } from 'rxjs';
   styleUrls: ['./perf.component.scss']
 })
 
-export class PerfComponent implements OnInit, OnDestroy {
+export class PerfComponent implements OnInit, OnChanges, OnDestroy {
   salesData:SalesInterface[];
   salesData1:SalesInterface[]=[];
-  s_date=new Date('2020,01,01');
-  e_date=new Date('2020,02,02');
+  public myForm:FormGroup;
+  public minDate: Object = new Date(2019,1,1);
+  public maxDate: Object =  new Date(2020,5,1);
+  
   date_s:string;
   date_d=new Date('2001,01,01');
   averageSales:number=0;
@@ -28,22 +30,24 @@ export class PerfComponent implements OnInit, OnDestroy {
   av_cust_acc:number=0;
   av_cust_ltv:number=0;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  isVisible:boolean=false;  
+  isVisible:boolean=false;
+
   changeVisibility() {
     this.isVisible = !this.isVisible;
 }
 
-  constructor(private dataService:DataService,glForm:GlobalsService) {this.myForm=glForm.myForm  }
-  public myForm:FormGroup;
-  ngOnInit(): void {
+  constructor(private dataService:DataService,private fb: FormBuilder) {  }
   
-
+  ngOnInit(): void {
+    this.myForm = this.fb.group({
+      date: null,      
+      range: null
+    });
     this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
          this.salesData = data;
         // this.salesData1=data;
              /*setting the interval*/
-         this.s_date=new Date (this.myForm.value.range[0]); 
-         this.e_date=new Date (this.myForm.value.range[1]);   
+           
          this.dateFilter();
          this.salesData=this.salesData1;
          this.avSales();
@@ -57,7 +61,21 @@ export class PerfComponent implements OnInit, OnDestroy {
      })
      
   } 
-       
+  ngOnChanges():void{
+      /*new Data interval*/      
+      this.dateFilter();
+      this.salesData=this.salesData1;
+      this.avSales();
+      this.avRevenue();
+      this.avProfitUnit();
+      this.salesYTD=this.averageSales*this.salesData.length;
+      this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
+      this.avCustomer();
+  
+           
+  
+
+  }     
   ngOnDestroy() {
     
     this.destroy$.next(true);
@@ -71,8 +89,8 @@ export class PerfComponent implements OnInit, OnDestroy {
     {
       this.date_s=this.salesData[i].date;
       this.date_d=new Date(this.date_s);
-      if (this.date_d>this.s_date){ 
-        if(this.date_d<this.e_date){
+      if (this.date_d>this.minDate){ 
+        if(this.date_d<this.maxDate){
           this.salesData1.push(this.salesData[i]);
         }  
       }
