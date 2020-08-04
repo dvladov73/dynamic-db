@@ -1,11 +1,12 @@
-import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 
-import { FormBuilder, FormGroup, FormControl,ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 
 import { DataService } from '../../core/data.service';
 import { SalesInterface } from '../../shared/data-interface';
 
 import { Subject } from 'rxjs';
+import { min } from 'd3';
 
 @Component({
   selector: 'app-perf',
@@ -13,15 +14,16 @@ import { Subject } from 'rxjs';
   styleUrls: ['./perf.component.scss']
 })
 
-export class PerfComponent implements OnInit, OnChanges, OnDestroy {
+export class PerfComponent implements OnInit,  OnDestroy {
   salesData:SalesInterface[];
   salesData1:SalesInterface[]=[];
   public myForm:FormGroup;
-  public minDate: Object = new Date(2019,1,1);
-  public maxDate: Object =  new Date(2020,5,1);
+  public minDate: Object = new Date('2019-10-20');
+  public maxDate: Object =  new Date('2020-01-01');
+
   
   date_s:string;
-  date_d=new Date('2001,01,01');
+  date_d: Object = new Date('2001-01-01');
   averageSales:number=0;
   averageRevenue:number=0;
   averageProfitUnit:number=0;
@@ -31,6 +33,7 @@ export class PerfComponent implements OnInit, OnChanges, OnDestroy {
   av_cust_ltv:number=0;
   destroy$: Subject<boolean> = new Subject<boolean>();
   isVisible:boolean=false;
+  
 
   changeVisibility() {
     this.isVisible = !this.isVisible;
@@ -39,10 +42,12 @@ export class PerfComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private dataService:DataService,private fb: FormBuilder) {  }
   
   ngOnInit(): void {
+    
     this.myForm = this.fb.group({
       date: null,      
       range: null
     });
+  
     this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
          this.salesData = data;
         // this.salesData1=data;
@@ -58,24 +63,10 @@ export class PerfComponent implements OnInit, OnChanges, OnDestroy {
          this.avCustomer();
      
               
-     })
+     });
      
   } 
-  ngOnChanges():void{
-      /*new Data interval*/      
-      this.dateFilter();
-      this.salesData=this.salesData1;
-      this.avSales();
-      this.avRevenue();
-      this.avProfitUnit();
-      this.salesYTD=this.averageSales*this.salesData.length;
-      this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
-      this.avCustomer();
   
-           
-  
-
-  }     
   ngOnDestroy() {
     
     this.destroy$.next(true);
@@ -83,14 +74,41 @@ export class PerfComponent implements OnInit, OnChanges, OnDestroy {
     this.destroy$.unsubscribe();
     
   }
- 
+ OnSubmit(){
+      
+  /* New Interval */       
+   this.minDate=this.myForm.value.range[0];
+   this.maxDate=this.myForm.value.range[1];
+   this.destroy$.next(true);
+   // Unsubscribe from the subject
+   this.destroy$.unsubscribe();
+   //re-subscribe
+   this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
+    this.salesData = data;
+   // this.salesData1=data;
+        /*setting the interval*/
+      
+    this.dateFilter();
+    this.salesData=this.salesData1;
+    this.avSales();
+    this.avRevenue();
+    this.avProfitUnit();
+    this.salesYTD=this.averageSales*this.salesData.length;
+    this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
+    this.avCustomer();
+        
+   });
+  
+    
+  
+ }
   private dateFilter(){
     for(var i=0;i<this.salesData.length;i++)
     {
       this.date_s=this.salesData[i].date;
       this.date_d=new Date(this.date_s);
-      if (this.date_d>this.minDate){ 
-        if(this.date_d<this.maxDate){
+      if (this.date_d>=this.minDate){ 
+        if(this.date_d<=this.maxDate){
           this.salesData1.push(this.salesData[i]);
         }  
       }

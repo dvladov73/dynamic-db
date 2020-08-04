@@ -12,6 +12,7 @@ import { ChartDataComponent } from '../chart-data/chart-data.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
+
 @NgModule({
   declarations: [PerfComponent,SalesChartComponent],
   exports: [

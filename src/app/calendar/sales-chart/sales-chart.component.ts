@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ViewEncapsulation, ElementRef, OnChanges, } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ElementRef, SimpleChanges, OnChanges, SimpleChange, } from '@angular/core';
 import * as d3 from 'd3';
 import * as d3Array from 'd3';
 
 import { SalesInterface } from '../../shared/data-interface';
-import { parseDate } from 'ngx-bootstrap/chronos';
-import { datepickerAnimation } from 'ngx-bootstrap/datepicker/datepicker-animations';
+
+
 
 @Component({
   selector: 'app-sales-chart',
@@ -43,8 +43,9 @@ export class SalesChartComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
   ngOnChanges(): void {
    
- 
-     
+   // if (changes.data.currentValue) {
+      //this.mainContainer.remove(); 
+    
      /*Date count*/
      
      for (var i=0; i<this.data.length;i++){
@@ -74,7 +75,7 @@ export class SalesChartComponent implements OnInit, OnChanges {
     this.draw();
     //Listening to the window size
    window.addEventListener('resize', this.resize.bind(this));
-   
+  // }
   }
   private setSVGDimensions() {
     this.svg.style('width', this.width).style('height', this.height);
@@ -149,7 +150,7 @@ export class SalesChartComponent implements OnInit, OnChanges {
       .style("fill", this.color(0));
 
       this.mainContainer .append("text")
-      .style("font", "10px")
+      .style("font", "1em")
       .attr("x", this.width-this.margin.right - 15)
       .attr("y", 9)
       .attr("dy", ".20em")
@@ -164,7 +165,7 @@ export class SalesChartComponent implements OnInit, OnChanges {
       .attr("height", 18)
       .style("fill", this.color1(0)); 
       this.mainContainer .append("text")
-      .style("font", "10px")
+      .style("font", "1em")
       .attr("x", this.width-this.margin.right - 15)
       .attr("y", 45)
       .attr("dy", ".20em")
