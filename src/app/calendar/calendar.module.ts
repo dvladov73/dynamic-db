@@ -10,11 +10,12 @@ import { ReactiveFormsModule,FormsModule  } from '@angular/forms';
 import { PerfComponent } from './perf/perf.component';
 import { ChartDataComponent } from '../chart-data/chart-data.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { PerfChartComponent } from './perf-chart/perf-chart.component';
 
 
 
 @NgModule({
-  declarations: [PerfComponent,SalesChartComponent],
+  declarations: [PerfComponent,SalesChartComponent, PerfChartComponent],
   exports: [
     
   ],

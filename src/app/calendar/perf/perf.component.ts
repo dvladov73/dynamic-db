@@ -79,10 +79,9 @@ export class PerfComponent implements OnInit,  OnDestroy {
   /* New Interval */       
    this.minDate=this.myForm.value.range[0];
    this.maxDate=this.myForm.value.range[1];
-   this.destroy$.next(true);
-   // Unsubscribe from the subject
-   this.destroy$.unsubscribe();
-   //re-subscribe
+  
+  
+   //Subscribe to the Observable
    this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
     this.salesData = data;
    // this.salesData1=data;
