@@ -8,7 +8,8 @@ $theme-colors: (
   background-image: linear-gradient(to right,#06a59a , #beeeeb);
  }
 .no-gutters{
-  width:100%;
+  min-width: 100%;
+  width: fit-content;
   margin-left:0;
   margin-right:0;
   background-image: linear-gradient(to right,#06a59a , #beeeeb);

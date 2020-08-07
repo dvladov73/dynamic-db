@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterContentInit, AfterViewInit, OnChanges } from '@angular/core';
 
 import { FormBuilder, FormGroup} from '@angular/forms';
 
 import { DataService } from '../../core/data.service';
 import { SalesInterface } from '../../shared/data-interface';
+import { PerfChartComponent } from '../perf-chart/perf-chart.component';
 
 import { Subject } from 'rxjs';
-import { min } from 'd3';
+
 
 @Component({
   selector: 'app-perf',
@@ -14,13 +15,16 @@ import { min } from 'd3';
   styleUrls: ['./perf.component.scss']
 })
 
-export class PerfComponent implements OnInit,  OnDestroy {
+export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
+  @ViewChild('perfChart', { static: true }) chart: PerfChartComponent;
+ 
   salesData:SalesInterface[];
   salesData1:SalesInterface[]=[];
   public myForm:FormGroup;
   public minDate: Object = new Date('2019-10-20');
   public maxDate: Object =  new Date('2020-01-01');
-
+  public sDate: Object = new Date('2019-01-01');
+  public eDate: Object =  new Date('2020-06-01');
   
   date_s:string;
   date_d: Object = new Date('2001-01-01');
@@ -40,33 +44,33 @@ export class PerfComponent implements OnInit,  OnDestroy {
 }
 
   constructor(private dataService:DataService,private fb: FormBuilder) {  }
+ ngAfterViewInit(){
   
-  ngOnInit(): void {
+   //Subscribe to the Observable
+   this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
+    this.salesData = data;
+   // this.salesData1=data;
+       
+    this.dateFilter(); //  initial interval
+  //  this.salesData=this.salesData1;
+    this.avSales();
+    this.avRevenue();
+    this.avProfitUnit();
+    this.salesYTD=this.averageSales*this.salesData.length;
+    this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
+    this.avCustomer();
+        
+   });
+  // this.chart.data=[...this.salesData]
+  }
+  ngOnInit (): void {
     
     this.myForm = this.fb.group({
       date: null,      
       range: null
     });
-  
-    this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
-         this.salesData = data;
-        // this.salesData1=data;
-             /*setting the interval*/
-           
-         this.dateFilter();
-         this.salesData=this.salesData1;
-         this.avSales();
-         this.avRevenue();
-         this.avProfitUnit();
-         this.salesYTD=this.averageSales*this.salesData.length;
-         this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
-         this.avCustomer();
-     
-              
-     });
-     
-  } 
-  
+    
+}  
   ngOnDestroy() {
     
     this.destroy$.next(true);
@@ -88,7 +92,7 @@ export class PerfComponent implements OnInit,  OnDestroy {
         /*setting the interval*/
       
     this.dateFilter();
-    this.salesData=this.salesData1;
+   // this.salesData=[...this.salesData1];
     this.avSales();
     this.avRevenue();
     this.avProfitUnit();
@@ -102,7 +106,8 @@ export class PerfComponent implements OnInit,  OnDestroy {
   
  }
   private dateFilter(){
-    for(var i=0;i<this.salesData.length;i++)
+    this.salesData1=[]; //clear the interim array
+     for(var i=0;i<this.salesData.length;i++)
     {
       this.date_s=this.salesData[i].date;
       this.date_d=new Date(this.date_s);
@@ -112,6 +117,9 @@ export class PerfComponent implements OnInit,  OnDestroy {
         }  
       }
     }
+   this.salesData=[]; //clear working array
+   this.salesData=this.salesData1; //pass data to working array
+   
   }
   private avSales(){
     var av_sales;
