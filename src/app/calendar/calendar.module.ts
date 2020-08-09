@@ -10,12 +10,13 @@ import { ChartDataComponent } from '../chart-data/chart-data.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon'
 import { PerfChartComponent } from './perf-chart/perf-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 
 
 
 @NgModule({
-  declarations: [PerfComponent, PerfChartComponent],
+  declarations: [PerfComponent, PerfChartComponent, PieChartComponent],
   exports: [
     
   ],

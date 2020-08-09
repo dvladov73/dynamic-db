@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup} from '@angular/forms';
 import { DataService } from '../../core/data.service';
 import { SalesInterface } from '../../shared/data-interface';
 import { PerfChartComponent } from '../perf-chart/perf-chart.component';
-
+import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { Subject } from 'rxjs';
 
 
@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 
 export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
   @ViewChild('perfChart', { static: true }) chart: PerfChartComponent;
- 
+  @ViewChild('piefChart', { static: true }) pie: PerfChartComponent;
   salesData:SalesInterface[];
   salesData1:SalesInterface[]=[];
   public myForm:FormGroup;
@@ -69,7 +69,21 @@ export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
       date: null,      
       range: null
     });
-    
+     //Subscribe to the Observable
+   this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
+    this.salesData = data;
+   // this.salesData1=data;
+       
+    this.dateFilter(); //  initial interval
+  //  this.salesData=this.salesData1;
+    this.avSales();
+    this.avRevenue();
+    this.avProfitUnit();
+    this.salesYTD=this.averageSales*this.salesData.length;
+    this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
+    this.avCustomer();
+        
+   });
 }  
   ngOnDestroy() {
     

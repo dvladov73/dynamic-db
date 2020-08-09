@@ -14,8 +14,8 @@ export class PerfChartComponent implements OnInit, OnChanges {
   
   @Input() data:SalesInterface[];
   @Input() transitionTime = 1000;
-  private xmax=10;
-  private ymax = 200;
+  private xmax=0;
+  private ymax =0;
   private maxY1:number;
   private maxY2:number;
  // @Input() hticks = 0;

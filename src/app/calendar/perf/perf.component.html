@@ -4,12 +4,14 @@
  <div class="card-group row no-gutters">
       <div class="col-8 mx-auto">
         <div class="card">
-          <div class="card-body"  id="chart">
+          <div class="card-body">
             <h4 class="card-title">Total Sales and Expenses</h4>
             <div >
              <p>Chart view <mat-slide-toggle (click)="changeVisibility();" id="showSlider">Table view</mat-slide-toggle></p>
             </div>
-            <app-perf-chart #perfChart [data]="salesData"></app-perf-chart>
+            <div class="card-text">
+             <app-pie-chart #pieChart [data]="salesData" ></app-pie-chart>
+           </div>
           </div>
         </div>
       </div> <!-- End of chart card-->
@@ -65,10 +67,12 @@
 <div class="card-group row no-gutters">
   <div class="col-12 mx-auto">
     <div class="card">
-      <div class="card-body"  id="saleschart">
-        <h4 class="card-title">Total Sales and Expenses</h4>
-        
-      
+      <div class="card-body">
+        <h4 class="card-title">Sales by unit</h4>
+        <div class="card-text">
+         <!--<app-pie-chart [data]="salesData" ></app-pie-chart>-->
+         <app-perf-chart #perfChart [data]="salesData"></app-perf-chart>
+        </div>
       </div>
     </div>
   </div> <!-- End of chart card--> 
