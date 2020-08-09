@@ -52,7 +52,7 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
     this.svg = d3.select(this.hostElement).append('svg');
     //this.width=parseInt(d3.select(this.hostElement).style('width'), 10);
     //this.height=parseInt(d3.select(this.hostElement).style('height'), 10);
-    this.width=300;
+    this.width=600;
     this.height=250;
     this.radius = (Math.min((this.width-this.margin.left-this.margin.right), (this.height-this.margin.top-this.margin.bottom)))/2;
    
@@ -69,8 +69,8 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
 
   }
   private setSVGDimensions() {
-    this.svg.style('width', this.width).style('height', this.height);
-     //       .attr('viewBox', '0 0 ' + this.width + ' ' + this.height);
+    this.svg.style('width', '100%').style('height', '70%')
+             .attr('viewBox', '0 0 ' + this.width + ' ' + this.height);
   }
   
   private draw() {
