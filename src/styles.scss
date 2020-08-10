@@ -17,6 +17,16 @@ $theme-colors: (
 .card{
   margin:5px;
 }
+.card-title{
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+}
+.card-text{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 0.5em;
+  
+}
 .container {
  max-width: 2500px;
   width: 100%;
@@ -30,6 +40,8 @@ body {
   overflow-x: hidden;
   margin: 0px;
   padding: 0px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size:15;
 }
 .logo {
   width: 150px;

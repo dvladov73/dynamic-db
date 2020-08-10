@@ -1,47 +1,35 @@
-
-<div class="container">
-  
+ 
     <div class="card-group row no-gutters">
       <div class="col-4 mx-auto">
         <div class="card">
           <div class="card-body"  id="chart">
-            <h4 class="card-title">Card title</h4>
-           
-          </div>
-           
-        </div>
-      </div>
+            <h4 class="card-title">Main Dashboard</h4>
+          </div> <!-- card body-->
+        </div> <!-- card-->
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="card">
+              <div class="card-body" style="text-align: center;">
+                <h4 class="card-title">Card title</h4>
+              
+                <a routerLink='/calendar/perf' class="btn btn-primary">Sales Performance</a>
+              </div><!-- card-body-->
+            </div> <!-- card-->
+          </div> <!-- col-->  
+        </div> <!--row-->
+      </div> <!-- col -->
       <div class="col-8 mx-auto">
         <div class="card"> 
           <div class="card-body">
             <h4 class="card-title">Real-time chart</h4>
              <app-chart-data></app-chart-data>
-           </div>
-        </div>
-      </div> 
-    </div>
-    <div class="card-group row no-gutters">
-      <div class="col-4 mx-auto">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-          
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-8 mx-auto" >
-        <div class="card"> 
-          <div class="card-body">
-            <h4 class="card-title">Card Title</h4>
-            <i class="fas fa-address-card"></i>
-            <p class="card-text">{{salesYTD|currency}}</p>
-          </div>
-        </div>
-      </div> 
-    </div>
+           </div> <!-- card body-->
+        </div><!-- card-->
+      </div> <!-- col-->
+    </div><!-- row no-gutters-->
+    
+  
     
    
-</div>
+
 

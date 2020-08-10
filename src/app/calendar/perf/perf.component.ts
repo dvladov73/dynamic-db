@@ -6,6 +6,7 @@ import { DataService } from '../../core/data.service';
 import { SalesInterface } from '../../shared/data-interface';
 import { PerfChartComponent } from '../perf-chart/perf-chart.component';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
+import { CsvExportService } from 'src/app/core/csv-export.service';
 import { Subject } from 'rxjs';
 
 
@@ -35,16 +36,41 @@ export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
   profitYTD:number=0;
   av_cust_acc:number=0;
   av_cust_ltv:number=0;
+  u_sales:number[];
+  u_profit:number[];
+  u_expense:number[];
   destroy$: Subject<boolean> = new Subject<boolean>();
   isVisible:boolean=false;
   
 
   changeVisibility() {
-    this.isVisible = !this.isVisible;
-}
+    var myTable = document.getElementById('salesTable');
+    var myChart=document.getElementById('pieChart');
+  // get the current value display
+    var tableDisplay=myTable.style.display;
+  if (tableDisplay == 'none') {
+    // chart is visible. hide it
+    myChart.style.display = 'none';
+    myTable.style.display='block';
+  } 
+  else {
+    // chart is hidden. show it
+    myChart.style.display = 'block';
+    myTable.style.display='none';
+  }
+  }
 
-  constructor(private dataService:DataService,private fb: FormBuilder) {  }
- ngAfterViewInit(){
+  constructor(private dataService:DataService,private fb: FormBuilder,private csvService :CsvExportService) {  }
+  saveAsCSV() {
+    if(this.salesData.length > 0){
+        this.salesData.forEach(line => {
+         this.salesData1=this.salesData; 
+    });
+    this.csvService.exportToCsv('SalesReport.csv', this.salesData1);
+  }
+}
+ 
+  ngAfterViewInit(){
   
    //Subscribe to the Observable
    this.dataService.sendGetRequest().subscribe((data: SalesInterface[])=>{
@@ -59,9 +85,9 @@ export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
     this.salesYTD=this.averageSales*this.salesData.length;
     this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
     this.avCustomer();
-        
+    this.unitPerformance();    
    });
-  // this.chart.data=[...this.salesData]
+ 
   }
   ngOnInit (): void {
     
@@ -82,7 +108,7 @@ export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
     this.salesYTD=this.averageSales*this.salesData.length;
     this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
     this.avCustomer();
-        
+    this.unitPerformance();    
    });
 }  
   ngOnDestroy() {
@@ -106,14 +132,13 @@ export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
         /*setting the interval*/
       
     this.dateFilter();
-   // this.salesData=[...this.salesData1];
     this.avSales();
     this.avRevenue();
     this.avProfitUnit();
     this.salesYTD=this.averageSales*this.salesData.length;
     this.profitYTD=3*this.averageProfitUnit*this.salesData.length;
     this.avCustomer();
-        
+    this.unitPerformance();    
    });
   
     
@@ -164,6 +189,25 @@ export class PerfComponent implements OnInit,  OnDestroy, AfterViewInit {
       acc += curr.cust_ltv;
       return acc;
       }, 0)/this.salesData.length;
+  }
+  private unitPerformance(){
+        
+   //unit sales
+    this.u_sales[0]=this.salesData.reduce(function(a, b){
+      a+=b.sales1; return a;}, 0);
+    this.u_sales[1]=this.salesData.reduce(function(a, b){
+      a+=b.sales2;return a;}, 0);
+    this.u_sales[2]=this.salesData.reduce(function(a, b){
+      a+=b.sales3;return a;}, 0);
+   //unit expenses
+    this.u_expense[0]=this.salesData.reduce(function(a, b){
+      a+=b.expense1;return a;}, 0);
+    this.u_expense[1]=this.salesData.reduce(function(a, b){
+      a+=b.expense2;return a;}, 0);
+    this.u_expense[2]=this.salesData.reduce(function(a, b){
+      a+=b.expense3;return a;}, 0);
+    
+
   }
 
 }

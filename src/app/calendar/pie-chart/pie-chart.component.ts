@@ -14,7 +14,7 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
  // destroy$: Subject<boolean> = new Subject<boolean>();
   @Input() data:SalesInterface[];
   
-  u_data=[{res:0,unit:"1"},{res:0,unit:"2"},{res:0,unit:"3"}];
+  u_data=[{res:0,unit:"Retail"},{res:0,unit:"Wholesale"},{res:0,unit:"Online"}];
   hostElement='#pie';
   private width:number;
   private height:number;
@@ -57,7 +57,7 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
     this.radius = (Math.min((this.width-this.margin.left-this.margin.right), (this.height-this.margin.top-this.margin.bottom)))/2;
    
     this.setSVGDimensions();
-    this.color =d3.scaleLinear().domain([0,this.u_data.length]).range(<any[]>['#0000ff', '#8ef5f5']); //colours range
+    this.color =d3.scaleLinear().domain([0,this.u_data.length]).range(<any[]>['#81f7be', '#026636']); //colours range
     //this.color = d3.scaleOrdinal(d3.schemeCategory10);
     this.mainContainer = this.svg.append('g').attr('transform', `translate(${(this.width)/2},${(this.height)/2})`);
     this.pie = d3.pie().sort(null).value((d: any) =>(d.res));
@@ -84,7 +84,7 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
     const thickness=0.1; // for inner radius
     this.arc = d3.arc().outerRadius(this.radius).innerRadius(this.radius * thickness); 
     //labels
-   // this.arcLabel = d3.arc().innerRadius(this.radius * thickness).outerRadius(this.radius * .8);
+    this.arcLabel = d3.arc().innerRadius(this.radius * thickness).outerRadius(this.radius +20);
   }
 
   private drawSlices() {
@@ -102,12 +102,13 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
     this.texts = this.mainContainer.selectAll('text')
       .remove().exit()
       .data(this.pie(this.u_data))
-      .enter().append('text')
+      .enter().append('g').append('text')
       .attr('text-anchor', 'middle').attr('transform', d => `translate(${this.arcLabel.centroid(d)})`).attr('dy', '0.35em');
 
     this.texts.append('tspan').filter(d => (d.endAngle - d.startAngle) > 0.25)
       .attr('x', 0).attr('y', '1.3em').attr('fill-opacity', 0.7)
-      .text(d => d.unit.value);
+    //  .text(d => d.unit);
+     .text((d,i)=>this.u_data[i].unit);
   }
   private processData (data:SalesInterface[]) {
     this.u_data[0].res=this.data.reduce(function(a, b){
@@ -115,7 +116,7 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
         return a + b.expense1;}, 0);
     this.u_data[1].res=this.data.reduce(function(a, b){
       return a + b.sales2;}, 0)-this.data.reduce(function(a, b){
-        return a + b.expense2;}, 0);;  
+        return a + b.expense2;}, 0);  
     this.u_data[2].res=this.data.reduce(function(a, b){
       return a + b.sales3;}, 0)-this.data.reduce(function(a, b){
         return a + b.expense3;}, 0);
@@ -126,12 +127,12 @@ export class PieChartComponent implements  OnInit, OnDestroy, OnChanges {
     this.setSVGDimensions();
     this.setArcs();
      this.repaint();
-  //  this.drawLabels();
+    this.drawLabels();
   }
 
   private repaint() {
     this.drawSlices();
-   // this.drawLabels();
+    this.drawLabels();
   }
   private removeExistingChartFromParent() {
     // !!!!Caution!!!

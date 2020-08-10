@@ -14,7 +14,7 @@ export class AreaChartComponent implements OnInit, OnChanges {
   @Input() ymax = 200;
   @Input() hticks = 60;
   @Input() data: number[];
-  @Input() showLabel = 0;
+  showLabel = 1;
   hostElement; // Native element hosting the SVG container
   svg; // Top level SVG element
   g; // SVG Group element
@@ -115,6 +115,14 @@ export class AreaChartComponent implements OnInit, OnChanges {
           .style("stroke-dasharray", ("1,1"))
           .attr("stroke-width", 0.1)
           .call(d3.axisBottom(this.x).ticks(10).tickSize(-80));
+    
+          if (this.showLabel === 1) {
+            this.g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('transform', 'translate(10,50) rotate(-90)')
+            .style('font-size', 8)
+            .text("'$000");
+        }
 
   }
 
@@ -136,13 +144,14 @@ export class AreaChartComponent implements OnInit, OnChanges {
       if (this.showLabel === 1) {
           this.g.append('text')
           .attr('text-anchor', 'middle')
-          .attr('transform', 'translate(10,50) rotate(-90)')
+          .attr('transform', 'translate(100,10) ')
           .style('font-size', 8)
-          .text('Frequency');
+          .text('Number of orders');
       }
   }
   private createAreaCharts() {
       this.paths = [];
+      var label=['Orders received','Packed','In Transit','Delivered'];
       this.bins.forEach((row, index) => {
           this.paths.push(this.g.append('path')
               .datum(row)
@@ -150,10 +159,29 @@ export class AreaChartComponent implements OnInit, OnChanges {
               .attr("stroke-width", 0.1)
               .attr('opacity', 0.5)
               .attr('d', (datum: any) => this.area(datum))
-          );
+              );
       });
+    
+      this.bins.forEach((row, index) => {
+          this.g.append('circle')
+          .attr('cx','175')
+          .attr('cy',25-index*6)
+          .attr('r','2')
+          .attr('fill', this.colorScale('' + index))
+      });  
+      this.bins.forEach((row, index) => {
+            this.g.append('text')
+            .attr('x','190')
+            .attr('y',7+index*6)
+            .style("font-size", ".2em")
+            .attr("dy", ".20em")
+            .style("text-anchor", "middle")
+            .style('fill', 'black')           
+            .text(label[index])
+     });    
+  
   }
-
+ 
   public updateChart(data: number[]) {
       if (!this.svg) {
           this.createChart(data);

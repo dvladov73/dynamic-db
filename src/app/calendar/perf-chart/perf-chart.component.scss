@@ -1,0 +1,16 @@
+.u_table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width:100%;
+    &th,thead{
+        text-align: center; 
+        border-left: 1px solid black;
+        background-color: palegreen;
+    }
+    &td,tr{
+      padding:10px;
+      text-align: right;
+      border: 1px solid black;
+    } 
+    
+  }
