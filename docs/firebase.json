@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/dynamic-db/assets",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
