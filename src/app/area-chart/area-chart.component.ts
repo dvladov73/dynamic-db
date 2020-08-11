@@ -14,7 +14,7 @@ export class AreaChartComponent implements OnInit, OnChanges {
   @Input() ymax = 200;
   @Input() hticks = 60;
   @Input() data: number[];
-  @Input() showLabel = 1;
+  @Input() showLabel = 0;
   hostElement; // Native element hosting the SVG container
   svg; // Top level SVG element
   g; // SVG Group element
@@ -22,7 +22,7 @@ export class AreaChartComponent implements OnInit, OnChanges {
   x; // X-axis graphical coordinates
   y; // Y-axis graphical coordinates
   colors = d3.scaleOrdinal(d3.schemeCategory10);
-  bins; // Array of frequency distributions - one for each area chaer
+  bins; // Array of frequency distributions - one for each area chart
   paths; // Path elements for each area chart
   area; // For D3 area function
   histogram; // For D3 histogram function
@@ -96,7 +96,7 @@ export class AreaChartComponent implements OnInit, OnChanges {
 
   private setColorScale() {
       this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-      // Below is an example of using custom colors
+      // Custom colors
       // this.colorScale = d3.scaleOrdinal().domain([0,1,2,3]).range(['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']);
   }
 

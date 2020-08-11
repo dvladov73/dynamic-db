@@ -1,16 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 $theme-colors: (
-  "primary": #0057d9,
+  "primary": #06a59a,
   "danger": #ff4136,
   "light":#46c1f1
 );
+.navbar-custom {
+  background-image: linear-gradient(to right,#06a59a , #beeeeb);
+ }
 .no-gutters{
-  width:100%;
+  min-width: 100%;
+  width: fit-content;
   margin-left:0;
   margin-right:0;
+  background-image: linear-gradient(to right,#06a59a , #beeeeb);
 }
 .card{
   margin:5px;
 }
+.container {
+ max-width: 2500px;
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  font-size: 0px;
+  display: flex;
+  flex-wrap: wrap
+}
+body {
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+.logo {
+  width: 150px;
+  height:50px;
+  border-radius: 25px;
+}
 
+.card-text{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: medium;
+  font-weight: bold;
+}
 @import  "~bootstrap/scss/bootstrap.scss";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
