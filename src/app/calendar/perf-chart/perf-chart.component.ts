@@ -31,6 +31,10 @@ export class PerfChartComponent implements OnInit, OnChanges {
   colors = d3.scaleOrdinal(d3.schemeCategory10);
   private bars:any;
   private bars1:any;
+  private label:any;
+  private label1:any;
+  private text:any;
+  private text1:any;
  
 
   constructor(private elRef: ElementRef) {
@@ -119,7 +123,7 @@ export class PerfChartComponent implements OnInit, OnChanges {
    
       this.y = d3.scaleLinear()
           .domain([0, this.ymax])
-          .range([this.viewBoxHeight-10, 0]);
+          .range([this.viewBoxHeight-10, 10]);
       this.g.append('g')
           .attr('transform', 'translate(30,0)')
           .attr("stroke-width", 0.5)
@@ -157,7 +161,7 @@ export class PerfChartComponent implements OnInit, OnChanges {
         .remove().exit()
         .data(this.data).enter().append('rect')  
   
-        this.bars1
+     this.bars1
         .attr('x',d => this.x(d.date))
         .attr('y', d => this.y(d.expense1+d.expense2+d.expense3))
         .attr('width', this.x.bandwidth()/2)
@@ -171,8 +175,32 @@ export class PerfChartComponent implements OnInit, OnChanges {
         .on('mouseleave', function (actual, i) {
           d3.select(this).attr('opacity', 1)
          });
-
-
+      this.label=this.svg.append('circle')
+        .attr('cx','150')
+        .attr('cy','5')
+        .attr('r','2')
+        .attr('fill', '#72f7b6')
+      this.text=this.svg.append('text')  
+        .attr('x','160')
+        .attr('y',5)
+        .style("font-size", ".2em")
+        .attr("dy", ".20em")
+        .style("text-anchor", "middle")
+        .style('fill', 'black')           
+        .text('Sales')
+      this.label1=this.svg.append('circle')
+        .attr('cx','170')
+        .attr('cy','5')
+        .attr('r','2')
+        .attr('fill', '#34eb92')
+      this.text1=this.svg.append('text')  
+        .attr('x','180')
+        .attr('y',5)
+        .style("font-size", ".2em")
+        .attr("dy", ".20em")
+        .style("text-anchor", "middle")
+        .style('fill', 'black')           
+        .text('Expense')
   }
 
   private removeExistingChartFromParent() {
